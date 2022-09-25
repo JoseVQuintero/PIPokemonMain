@@ -118,7 +118,8 @@ export function getTypes() {
 export function getPokemons(query) {  
   return function (dispatch) {
     dispatch({ type: PUT_LOADING, payload: true });
-    return fetch(`${REACT_APP_API_URL}/pokemons${query.trim()!==''?'?name='+query:''}`)
+    //return fetch(`${REACT_APP_API_URL}/pokemons${query.trim() !== '' ? '?name=' + query : ''}`)
+    return fetch(`https://pokeapi.co/api/v2/pokemon`)
       .then((res) => res.json())
       .then((result) => {
         dispatch({ type: GET_POKEMONS, payload: result });
