@@ -8,7 +8,7 @@ export const GET_POKEMONDETAILS = "GET_POKEMONDETAILS";
 export const MESSAGE_POKEMON = "MESSAGE_POKEMON";
 
 //const apiKey = "d6a233caafc94977b208b4730974f683";
-const { REACT_APP_API_URL = "http://localhost:3001" } = process.env;
+const { REACT_APP_API_URL = "18.222.56.180:3005" } = process.env;
 
 //pedir la peli api
 /*export function getMyRecipe(query) {
