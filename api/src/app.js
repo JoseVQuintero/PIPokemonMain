@@ -15,7 +15,7 @@ server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 
-app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
+server.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
 
 
 server.use((req, res, next) => {
