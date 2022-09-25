@@ -8,11 +8,12 @@ export const GET_POKEMONDETAILS = "GET_POKEMONDETAILS";
 export const MESSAGE_POKEMON = "MESSAGE_POKEMON";
 
 //const apiKey = "d6a233caafc94977b208b4730974f683";
+const { REACT_APP_API_URL = "http://localhost:3001" } = process.env;
 
 //pedir la peli api
 /*export function getMyRecipe(query) {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/recipe?name=${query}`)
+    return fetch(`${REACT_APP_API_URL}/recipe?name=${query}`)
       .then((response) => response.json()) //despues
       .then((json) => {
         const dataJson = json?.map((r) => {
@@ -44,7 +45,7 @@ export const MESSAGE_POKEMON = "MESSAGE_POKEMON";
 //pedir la peli api
 export function getTypes() {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/types`)
+    return fetch(`${REACT_APP_API_URL}/types`)
       .then((res) => res.json())
       .then((result) => {
         const types = result?.map((d) => d.name) || [];
@@ -117,7 +118,7 @@ export function getTypes() {
 export function getPokemons(query) {  
   return function (dispatch) {
     dispatch({ type: PUT_LOADING, payload: true });
-    return fetch(`http://localhost:3001/pokemons${query.trim()!==''?'?name='+query:''}`)
+    return fetch(`${REACT_APP_API_URL}/pokemons${query.trim()!==''?'?name='+query:''}`)
       .then((res) => res.json())
       .then((result) => {
         dispatch({ type: GET_POKEMONS, payload: result });
@@ -169,7 +170,7 @@ export function setFilter(state) {
 export function addPokemon(state) {
   return function (dispatch) {
    dispatch({ type: PUT_LOADING, payload: true });
-    return fetch("http://localhost:3001/pokemons", {
+    return fetch(`${REACT_APP_API_URL}/pokemons`, {
       method: "POST",
       body: JSON.stringify({ state }),
       headers: { "Content-Type": "application/json" },
@@ -190,7 +191,7 @@ export function addPokemon(state) {
 export function getPokemonsDetail(query) {
   return function (dispatch) {
     dispatch({ type: PUT_LOADING, payload: true });
-    return fetch(`http://localhost:3001/pokemons/${query}`)
+    return fetch(`${REACT_APP_API_URL}/pokemons/${query}`)
       .then((res) => res.json())
       .then((result) => {
         dispatch({ type: GET_POKEMONDETAILS, payload: result });
