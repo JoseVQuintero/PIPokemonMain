@@ -7,8 +7,9 @@ export const ADD_POKEMON = "ADD_RECIPE";
 export const GET_POKEMONDETAILS = "GET_POKEMONDETAILS";
 export const MESSAGE_POKEMON = "MESSAGE_POKEMON";
 
-//const apiKey = "d6a233caafc94977b208b4730974f683";
 const { REACT_APP_API_URL = "18.222.56.180:3005" } = process.env;
+
+//const apiKey = "d6a233caafc94977b208b4730974f683";
 
 //pedir la peli api
 /*export function getMyRecipe(query) {
@@ -115,10 +116,14 @@ export function getTypes() {
   };
 }*/
 
-export function getPokemons(query) {  
+export function getPokemons(query) {
   return function (dispatch) {
     dispatch({ type: PUT_LOADING, payload: true });
-    return fetch(`${REACT_APP_API_URL}/pokemons${query.trim()!==''?'?name='+query:''}`)
+    return fetch(
+      `${REACT_APP_API_URL}/pokemons${
+        query.trim() !== "" ? "?name=" + query : ""
+      }`
+    )
       .then((res) => res.json())
       .then((result) => {
         dispatch({ type: GET_POKEMONS, payload: result });
@@ -154,7 +159,7 @@ export function setFilter(state) {
   return function (dispatch) {
     return dispatch({
       type: SET_FILTER,
-      payload:state
+      payload: state,
     });
   };
 }
@@ -169,24 +174,28 @@ export function setFilter(state) {
 
 export function addPokemon(state) {
   return function (dispatch) {
-   dispatch({ type: PUT_LOADING, payload: true });
+    dispatch({ type: PUT_LOADING, payload: true });
     return fetch(`${REACT_APP_API_URL}/pokemons`, {
       method: "POST",
       body: JSON.stringify({ state }),
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => { return { message: res.json(), add: parseInt(res.status) <= 201 ? 1 : 2 }; })
+      .then((res) => {
+        return {
+          message: res.json(),
+          add: parseInt(res.status) <= 201 ? 1 : 2,
+        };
+      })
       .then((res) => {
         res.message.then((response) => {
-           dispatch({
-             type: ADD_POKEMON,
-             payload: { message: response?.details, add: res.add },
-           });
+          dispatch({
+            type: ADD_POKEMON,
+            payload: { message: response?.details, add: res.add },
+          });
         });
       });
- };
+  };
 }
-
 
 export function getPokemonsDetail(query) {
   return function (dispatch) {
@@ -197,14 +206,10 @@ export function getPokemonsDetail(query) {
         dispatch({ type: GET_POKEMONDETAILS, payload: result });
       });
   };
-  
 }
-
 
 export function messagePokemon(status) {
   return function (dispatch) {
     dispatch({ type: MESSAGE_POKEMON, payload: status });
   };
-};
-
-
+}
