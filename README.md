@@ -1,5 +1,10 @@
 ## Publicado en AWS
+URL: http://ec2-18-119-113-192.us-east-2.compute.amazonaws.com:3002/
 
+1. Clona el proyecto
+2. Ejecuta npm install en cd api y cd client
+3. Ejecuta en cd client npm start
+4. Ejecuta en cd api npm start
 
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
